@@ -7,10 +7,7 @@ import GoogleSingIn from '../Register/GoogleSingIn';
 
 const Login = () => {
     let navigate = useNavigate();
-    let location = useLocation();
     let [user, loading, error] = useAuthState(auth);
-
-    let from = location.state?.from?.pathname || "/";
     const [
         signInWithEmailAndPassword,
         euser,
@@ -20,9 +17,9 @@ const Login = () => {
       useEffect(()=>{
         if(user || euser){
             
-        navigate(from, { replace: true });
+        navigate('/');
         }
-    },[user]);
+    },[user,euser,navigate]);
     const handleLogin = event =>{
         event.preventDefault();
         const email = event.target.email.value;

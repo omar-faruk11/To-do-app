@@ -8,10 +8,8 @@ import GoogleSingIn from './GoogleSingIn';
 
 const Register = () => {
     let navigate = useNavigate();
-    let location = useLocation();
     let [user, loading, error] = useAuthState(auth);
 
-    let from = location.state?.from?.pathname || "/";
     const [
         createUserWithEmailAndPassword,
         euser,
@@ -32,7 +30,11 @@ const Register = () => {
 
         }
     };
-    
+    useEffect(()=>{
+        if(user || euser){
+            navigate('/')
+        }
+    },[user, euser,navigate])
 
     if (loading || eloading) {
         return <Loading />
